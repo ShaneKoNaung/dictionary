@@ -15,6 +15,16 @@ def meaning(w):
         w = w.lower()
         if w in dict:
             return dict[w]
+
+        # search for capitalized words
+        w1 = w.capitalize()
+        if w1 in dict:
+            return dict[w1]
+
+        # search for all cap
+        w2 = w.upper()
+        if w2 in dict:
+            return dict[w2]
         # guess the closest word
         close_words = close(w, dict.keys(), cutoff=0.75)
 
@@ -28,9 +38,9 @@ def meaning(w):
             if yn == 'Y':
                 return dict[close_words[0]]
             else:
-                return "I don't understand your input."
+                return "I can't find the word."
         else:
-            return "I don't understand your input."
+            return "I can't find the word."
 
 
 def print_words(words):
