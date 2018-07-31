@@ -10,16 +10,25 @@ def meaning(w):
     '''
     try:
         return dict[w]
+
     except KeyError:
+        w = w.lower()
+        if w in dict:
+            return dict[w]
         # guess the closest word
         close_words = close(w, dict.keys(), cutoff=0.75)
+
         if len(close_words) > 0:
             print("Did you mean {} instead? Enter Y if yes , N if no.".format(close_words[0]))
             yn = input("Enter :")
+
             while yn != 'Y' and yn != 'N':
                 yn = input("Try agian(Y or N) :")
+
             if yn == 'Y':
                 return dict[close_words[0]]
+            else:
+                return "I don't understand your input."
         else:
             return "I don't understand your input."
 
@@ -27,9 +36,9 @@ def meaning(w):
 def print_words(words):
     if type(words) == str:
         print(words)
-        return
-    for i, w in enumerate(words):
-        print("{}: {}".format(i+1, w))
+    else:
+        for i, w in enumerate(words):
+            print("{}: {}".format(i+1, w))
     print("Enter q to quit.")
     print()
 
@@ -40,7 +49,7 @@ def dictionary():
         word = input('Enter :')
         if word == 'q':
             break
-        word = word.strip().lower()
+        word = word.strip()
         print_words(meaning(word))
 
 
