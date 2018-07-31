@@ -16,6 +16,8 @@ def meaning(w):
         if len(close_words) > 0:
             print("Did you mean {} instead? Enter Y if yes , N if no.".format(close_words[0]))
             yn = input("Enter :")
+            while yn != 'Y' and yn != 'N':
+                yn = input("Try agian(Y or N) :")
             if yn == 'Y':
                 return dict[close_words[0]]
         else:
@@ -28,14 +30,18 @@ def print_words(words):
         return
     for i, w in enumerate(words):
         print("{}: {}".format(i+1, w))
+    print("Enter q to quit.")
     print()
 
 
 
 def dictionary():
-    word = input('Enter :')
-    word = word.strip().lower()
-    print_words(meaning(word))
+    while True:
+        word = input('Enter :')
+        if word == 'q':
+            break
+        word = word.strip().lower()
+        print_words(meaning(word))
 
 
 dictionary()
